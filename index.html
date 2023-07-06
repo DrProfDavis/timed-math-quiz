@@ -1,41 +1,33 @@
+<!-- HTML original design taken from jQuery Password Generator in lesson 5.4 -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
     <title>Algebra Quiz</title>
+    <link rel="stylesheet" type="text/css" href="./assets/css/jass.css" />
+    <link rel="stylesheet" type="text/css" href="./assets/css/style.css" />
 </head>
-<body>
-    <div>
-        <h1>
-            Algebra Quiz
-        </h1>
-        <div id = "question">
-            This is the question
-        </div>
-        <ul id = "answer-choices">
-            <li>
-                This is the answer choice A
-            </li>
-            <li>
-                This is the answer choice B
-            </li>
-            <li>
-                This is the answer choice C
-            </li>
-            <li>
-                This is the answer choice D
-            </li>
-        </ul>
-        <button id = "start">
-            Start button
-        </button>
-        <input type = "text" id = "initials" placeholder = "Put initials here">
-        <button id = "start">
-            Submit button
-        </button>
-        <span id = "timer">Seconds left:</span>
-    </div>
-    <script src="script.js"></script>
+<body class="bg-dark text-light">
+    <main>
+    <h1>Algebra Quiz</h1>
+    <h3>All Questions are true/false</h3>
+    <h4>Answer as many as you can!</h4>
+    <hr/>
+
+    <aside>
+        Time Left: 30 seconds
+    </aside>
+
+    <pre class="text-dark bg-light p-5" id="question-display">Questions will go here</pre>
+    <hr/>
+    <button id="question-btn" class="btn btn-block btn-info ">True</button>
+    <hr/>
+    <button id="question-btn" class="btn btn-block btn-danger ">False</button>
+    <hr/>
+    <button id="start-btn" class="btn btn-block btn-light ">Start Quiz</button>
+    </main>
+
+    <script type="text/javascript" src="assets/js/script.js" ></script>
 </body>
 </html>
