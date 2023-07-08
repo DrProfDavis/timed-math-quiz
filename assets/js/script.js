@@ -7,9 +7,12 @@ var falseBtnEl = document.getElementById('false-btn');
 var questionDisplayEl = document.getElementById('question-display');
 var initialInputEl = document.getElementById('initial-input');
 var startButtonEl = document.getElementById("start-btn");
+var timeLeftEl = document.getElementById("timeLeft");
 var currentQuestion = 0;
 var truthOfQuestion = true;
 var currentScore = 0;
+var quizSeconds = 10;
+var quizSecondsTicker = 0;
 
 trueBtnEl.style.display = "none";
 falseBtnEl.style.display = "none";
@@ -85,12 +88,22 @@ function startQuiz(){
     startButtonEl.style.display = "none";
     trueBtnEl.style.display = "initial";
     falseBtnEl.style.display = "initial";
+    quizTimer();
     nextQuestion();
 }
 
-// Timer
+// Timers
 
+function quizTimer(){
+    myTimer = setTimeout(scoreKeeper, 10000);
+    myTimerUpdate = setInterval(quizTimerUpdate, 999);
+}
 
+function quizTimerUpdate(){
+    var seconds = quizSeconds - quizSecondsTicker;
+    quizSecondsTicker++;
+    document.getElementById("timeLeft").innerHTML = seconds - 1;
+}
 
 // Answer Question
 
@@ -129,11 +142,7 @@ function answeredFalse(){
 function nextQuestion(){
     if (currentQuestion == questionsArray.length){
         console.log("No More Questions!");
-        trueBtnEl.style.display = "none";
-        falseBtnEl.style.display = "none";
-        titleEl.style.display = "none";
-        scoreTitleEl.style.display = "initial";
-        questionDisplayEl.style.display = "none";
+        clearTimeout(myTimer);
         scoreKeeper();
     } 
     else {
@@ -145,13 +154,15 @@ function nextQuestion(){
     }
 }
 
-// End Timer
-
-
-
 // Score keeper
 
 function scoreKeeper(){
+    trueBtnEl.style.display = "none";
+    falseBtnEl.style.display = "none";
+    titleEl.style.display = "none";
+    scoreTitleEl.style.display = "initial";
+    questionDisplayEl.style.display = "none";
+    clearInterval(myTimerUpdate);
     let winnerInitials = prompt("Please enter your Initials", "AAA");
     if (winnerInitials.length < 4 && winnerInitials.length > 0) {
         console.log("Initials excepted")
