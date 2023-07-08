@@ -96,7 +96,7 @@ function startQuiz(){
 
 function quizTimer(){
     myTimer = setTimeout(scoreKeeper, 10000);
-    myTimerUpdate = setInterval(quizTimerUpdate, 999);
+    myTimerUpdate = setInterval(quizTimerUpdate, 1000);
 }
 
 function quizTimerUpdate(){
@@ -104,6 +104,8 @@ function quizTimerUpdate(){
     quizSecondsTicker++;
     document.getElementById("timeLeft").innerHTML = seconds - 1;
 }
+
+
 
 // Answer Question
 
@@ -165,7 +167,8 @@ function scoreKeeper(){
     clearInterval(myTimerUpdate);
     let winnerInitials = prompt("Please enter your Initials", "AAA");
     if (winnerInitials.length < 4 && winnerInitials.length > 0) {
-        console.log("Initials excepted")
+        // console.log("Initials excepted")
+        document.getElementById("winners-initials").innerHTML = winnerInitials + " ------ Score: " + currentScore + " ------ Time Left: " + quizSecondsTicker + " seconds";
     } else {
         alert("Please insert initials. Cannot be blank and must be under 4 characters")
         scoreKeeper();
