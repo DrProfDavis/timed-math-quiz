@@ -1,26 +1,90 @@
 // Variables
 
-var questionBtnEl = document.getElementById('question-btn');
+var titleEl = document.getElementById('title');
+var scoreTitleEl = document.getElementById('score-title');
+var trueBtnEl = document.getElementById('true-btn');
+var falseBtnEl = document.getElementById('false-btn');
 var questionDisplayEl = document.getElementById('question-display');
-var startButton = document.getElementById("start-btn");
+var initialInputEl = document.getElementById('initial-input');
+var startButtonEl = document.getElementById("start-btn");
 var currentQuestion = 0;
+var truthOfQuestion = true;
+var currentScore = 0;
+
+trueBtnEl.style.display = "none";
+falseBtnEl.style.display = "none";
+scoreTitleEl.style.display = "none";
 
 var questionsArray = [{
     question: "2 + 3 = 5",
-    choices: ["True", "False"],
     answer: "True"
 },{
     question: "5 - 3 = 8",
-    choices: ["True", "False"],
+    answer: "False"
+},{
+    question: "4 + 3 = 7",
+    answer: "True"
+},{
+    question: "7 - 3 = 5",
+    answer: "False"
+},{
+    question: "6 + 2 = 8",
+    answer: "True"
+},{
+    question: "9 - 2 = 6",
+    answer: "False"
+},{
+    question: "6 + 3 = 9",
+    answer: "True"
+},{
+    question: "3 - 4 = 1",
+    answer: "False"
+},{
+    question: "6 + 1 = 7",
+    answer: "True"
+},{
+    question: "9 - 3 = 5",
+    answer: "False"
+},{
+    question: "4 * 3 = 12",
+    answer: "True"
+},{
+    question: "9 / 3 = 6",
+    answer: "False"
+},{
+    question: "2 * 3 = 6",
+    answer: "True"
+},{
+    question: "3 / 6 = 2",
+    answer: "False"
+},{
+    question: "6 / 2 = 3",
+    answer: "True"
+},{
+    question: "9 * 1 = 10",
+    answer: "False"
+},{
+    question: "8 / 4 = 2",
+    answer: "True"
+},{
+    question: "1 * 1 = 2",
+    answer: "False"
+},{
+    question: "2 / 2 = 1",
+    answer: "True"
+},{
+    question: "3 * 3 = 6",
     answer: "False"
 }]
 
 // Start Quiz
 
-startButton.addEventListener("click", startQuiz);
+startButtonEl.addEventListener("click", startQuiz);
 
 function startQuiz(){
-    startButton.style.display = "none";
+    startButtonEl.style.display = "none";
+    trueBtnEl.style.display = "initial";
+    falseBtnEl.style.display = "initial";
     nextQuestion();
 }
 
@@ -30,14 +94,55 @@ function startQuiz(){
 
 // Answer Question
 
+function answerQuestion(){
+    console.log("im in the answer question function");
+    trueBtnEl.addEventListener("click", answeredTrue);
+    falseBtnEl.addEventListener("click", answeredFalse);
+}
 
+function answeredTrue(){
+    if (truthOfQuestion == "True"){
+        currentScore++;
+        console.log("You answered True and you were correct! Your current score is " + currentScore);
+    }
+    else {
+        console.log("You answered True and you were wrong! Your current score is " + currentScore);
+    }
+    currentQuestion++;
+    nextQuestion();
+}
+
+function answeredFalse(){
+    if (truthOfQuestion == "True"){
+        console.log("You answered False and you were wrong! Your current score is " + currentScore);
+    }
+    else {
+        currentScore++;
+        console.log("You answered False and you were correct! Your current score is " + currentScore);
+    }
+    currentQuestion++;
+    nextQuestion();
+}
 
 // Next Question
 
 function nextQuestion(){
-    var currentQuizData = questionsArray[currentQuestion];
-    questionDisplayEl.innerText = currentQuizData.question;
-    console.log(questionsArray[currentQuestion]);
+    if (currentQuestion == questionsArray.length){
+        console.log("No More Questions!");
+        trueBtnEl.style.display = "none";
+        falseBtnEl.style.display = "none";
+        titleEl.style.display = "none";
+        scoreTitleEl.style.display = "initial";
+        questionDisplayEl.style.display = "none";
+        scoreKeeper();
+    } 
+    else {
+        var currentQuizData = questionsArray[currentQuestion];
+        questionDisplayEl.innerText = currentQuizData.question;
+        truthOfQuestion = currentQuizData.answer;
+        console.log("truthOfQuestion changed to " + truthOfQuestion);
+        answerQuestion();
+    }
 }
 
 // End Timer
@@ -46,5 +151,13 @@ function nextQuestion(){
 
 // Score keeper
 
-
+function scoreKeeper(){
+    let winnerInitials = prompt("Please enter your Initials", "AAA");
+    if (winnerInitials.length < 4 && winnerInitials.length > 0) {
+        console.log("Initials excepted")
+    } else {
+        alert("Please insert initials. Cannot be blank and must be under 4 characters")
+        scoreKeeper();
+    }
+}
 

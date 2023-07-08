@@ -1,4 +1,4 @@
-<!-- HTML original design taken from jQuery Password Generator in lesson 5.4 -->
+<!-- Original HTML design taken from jQuery Password Generator in lesson 5.4 -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -10,20 +10,26 @@
 </head>
 <body class="bg-dark text-light">
     <main>
-    <h1>Algebra Quiz</h1>
-    <h3>All Questions are true/false</h3>
-    <h4>Answer as many as you can!</h4>
+    <div id="title">
+        <h1>Algebra Quiz</h1>
+        <h3>All Questions are true/false</h3>
+        <h4>Answer as many as you can!</h4>
+    </div>
+    <div id="score-title">
+        <h1>Great Job!</h1>
+        <h3>Here is the current leader board</h3>
+    </div> 
     <hr/>
 
-    <aside>
-        Time Left: 30 seconds
-    </aside>
+    <div>
+        Time Left: 10 seconds
+    </div>
 
     <pre class="text-dark bg-light p-5" id="question-display">Questions will go here</pre>
     <hr/>
-    <button id="question-btn" class="btn btn-block btn-info ">True</button>
+    <button id="true-btn" class="btn btn-block btn-info ">True</button>
     <hr/>
-    <button id="question-btn" class="btn btn-block btn-danger ">False</button>
+    <button id="false-btn" class="btn btn-block btn-danger ">False</button>
     <hr/>
     <button id="start-btn" class="btn btn-block btn-light ">Start Quiz</button>
     </main>
